@@ -27,6 +27,7 @@ body{
 
 #result-expression{
   color: white;
+  margin-left: 12px;
 }
 
 input[type="text"]{

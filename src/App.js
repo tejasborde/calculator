@@ -1,5 +1,6 @@
 import "./App.css";
-import { useState} from 'react'
+import { useState } from 'react';
+import { Cal } from "./components/Cal";
 
 
 function App() {
@@ -117,62 +118,27 @@ const ClearMemory = () => {
 
   const MemoryResult = () => {
     try {
-      setResult(memory);
-    
-      
+      if (memory !== '0')
+      {
+        if (result === '0') {
+        setResult(memory.toString());
+      } else {
+        const res = eval(result.toString() + memory.toString());
+        setResult(res.toString());
+      }
+      }  
+          
     } catch (error) {
       
     }
   }
   
+  const propsData = { result, memory, Clicked, ClearAll, BackSpace, Evaluate, square, squareRoot, percentage, recipkl, AddMemory, ClearMemory, SubMemory, MemoryResult };
+  
+  
   return (
     <>
-    <div className="container-fluid">
-        <div className="container">
-          <form>
-            {/* <div id="result-expression">{exp}</div>  */}
-            <input type="text" value={result} />
-            <div id="result-expression">{memory !== '0' ? 'M : '+memory  :''}</div>
-          </form>
-          <div className="keyPad">
-            <button onClick={ClearMemory}>MC</button>
-            <button onClick={SubMemory} >M&ndash;</button>  
-            <button onClick={AddMemory} >M+</button>
-            <button onClick={MemoryResult} >MR</button>
-            <button >{"<"}-</button>
-              <button onClick={ClearAll} id="clear">AC</button>
-            <button onClick={BackSpace}>CE</button>  
-            <button >&plusmn;</button>
-            <button onClick={squareRoot} >&radic;</button>
-            <button onClick={square} >x<sup>2</sup></button>
-              
-            <button onClick={Clicked} name="7">7</button>
-                <button onClick={Clicked} name="8">8</button>
-            <button onClick={Clicked} name="9">9</button>
-            <button onClick={Clicked} name="/">&divide;</button>
-            <button onClick={percentage}>%</button>
-             
-              <button onClick={Clicked} name="4">4</button>
-                <button onClick={Clicked} name="5">5</button>
-            <button onClick={Clicked} name="6">6</button>
-            <button onClick={Clicked} name="*">&times;</button>
-            <button onClick={recipkl}>1/x</button>
-              
-              <button onClick={Clicked} name="1">1</button>
-                <button onClick={Clicked} name="2">2</button>
-            <button onClick={Clicked} name="3">3</button>
-            <button onClick={Clicked} name="-">&ndash;</button>
-            <button onClick={Clicked} name="+">+</button>
-            <button onClick={Clicked} name=".">.</button>
-            
-            <button onClick={Clicked} name="0">0</button>
-            <button onClick={Clicked} name="00">00</button>
-                
-                <button onClick={Evaluate} id="result">=</button>
-            </div>
-        </div>
-    </div>
-
+        <Cal propsData={propsData} />
     </>
   );
 }
